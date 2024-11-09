@@ -1,0 +1,45 @@
+name: Run Automated Juice Shope Tests
+
+on:
+  push:
+    branches:
+      - master # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - master # Trigger on PR to main
+
+jobs:
+  android-tests:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: budtmo/docker-android-x86-11.0 # Android 11 emulator image
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Start Android Emulator
+        run: |
+          docker-android-run -e ANDROID_EMULATOR=true -e ANDROID_API_LEVEL=30
+          # Other emulator setup commands
+
+      - name: Install Appium and Dependencies
+        run: |
+          npm install -g appium
+          npm install
+
+      - name: Run Appium Tests
+        run: |
+          npm run test
+
+      - name: Upload Allure report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-report
+          path: allure-report # Upload the generated Allure report directory
+        if: always()
