@@ -8,9 +8,9 @@ This project is to automate the Android app E2E test cases.
 - WebDriver.io
 - Appium
 - Allure (reporting tool)
-- mocha (test runner)
-- github actions (CICD)
-- winston for logging
+- Mocha (test runner)
+- Github actions (CICD)
+- Winston for logging
 
 ## Folder structure
 
@@ -24,6 +24,8 @@ This project is to automate the Android app E2E test cases.
 - Test configuration are saved in `wdio.conf.ts` and android specific configs are saved in `wdio-android.conf.ts`
 - Test reports generates at `allure-reports`
 
+> **Note:** While Allure is used here for reporting, I prefer [ReportPortal](reportportal.io) for detailed reporting and analysis. However, due to hosting requirements for ReportPortal, Allure was used in this project for simplicity.
+
 ### Env variables
 
 - `ENV` ['prod','staging','local'] to run tests in the specific environment. Default is `staging`
@@ -34,7 +36,7 @@ This project is to automate the Android app E2E test cases.
 
 ```shell
 npm install
-ENV= staging npm run test
+npm run test
 ```
 
 ### Steps to open report
@@ -48,5 +50,10 @@ allure open
 Sample Report:
 ![Screenshot](snapshots/sampleReport.png)
 
+> **Note** Pipeline is failing because of space constraints in the free GitHub runners.
+
 Sample pipeline result:
 ![Screenshot](snapshots/pipeline.png)
+
+Local Run Report:
+![Screenshot](snapshots/localRun.png)
