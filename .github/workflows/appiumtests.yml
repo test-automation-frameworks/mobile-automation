@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       docker:
-        image: budtmo/docker-android-x86-11.0 # Android 11 emulator image
+        image: chrisss404/android-emulator # Android 11 emulator image
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
